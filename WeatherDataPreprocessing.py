@@ -8,6 +8,7 @@ def process_temp_data(file):
     with open(file, 'r', encoding='utf-8') as f:
         lines = f.readlines()
 
+    #header_idx = None
     # Find the header row index
     for i, line in enumerate(lines):
         if line.strip().startswith('Datum'):
