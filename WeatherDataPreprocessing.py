@@ -3,8 +3,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-print('test test test')
-
 def process_temp_data(file):
     # Skip metadata rows and find the actual header row (starts with 'Datum')
     with open(file, 'r', encoding='utf-8') as f:
@@ -18,13 +16,11 @@ def process_temp_data(file):
             break
 
     # Read the file starting from the header line
-    temp_data = pd.read_csv(
-        file,
-        sep=';',
-        header=0,
-        skiprows=header_idx,  # This will treat the correct line as header
-        encoding='utf-8'
-    )
+    temp_data = pd.read_csv(file,
+                            sep=';',
+                            header=0,
+                            skiprows=header_idx,  # This will treat the correct line as header
+                            encoding='utf-8')
 
     # Combine date and time columns into a single datetime column (best guess on column names)
     date_col = [col for col in temp_data.columns if 'Datum' in col][0]
