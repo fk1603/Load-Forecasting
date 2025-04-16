@@ -3,6 +3,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+print('test test test')
+
 def process_temp_data(file):
     # Skip metadata rows and find the actual header row (starts with 'Datum')
     with open(file, 'r', encoding='utf-8') as f:
