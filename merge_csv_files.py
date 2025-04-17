@@ -59,7 +59,7 @@ population_area = {
 }
 
 # Temperature
-weighted_avg = temp_result = get_weighted_average(
+weighted_avg = get_weighted_average(
     data_dir='TemperatureData',
     file_prefix='Temp',
     column_name='Lufttemperatur',
@@ -69,7 +69,7 @@ weighted_avg = temp_result = get_weighted_average(
 print(weighted_avg.head())
 
 # Humidity
-weighted_avg = humidity_result = get_weighted_average(
+weighted_avg = get_weighted_average(
     data_dir='HumidityData',
     file_prefix='HUMIDITY',
     column_name='Relativ Luftfuktighet',  
@@ -79,7 +79,7 @@ weighted_avg = humidity_result = get_weighted_average(
 print(weighted_avg.head())
 
 # Solar
-weighted_avg = humidity_result = get_weighted_average(
+weighted_avg = get_weighted_average(
     data_dir='SolarData',
     file_prefix='SOLAR',
     column_name='Global Irradians (svenska stationer)',  
