@@ -56,17 +56,11 @@ def fill_missing_timestamps(temp_data, freq='1h'):
     # Interpolate missing values in 'Lufttemperatur'
     if 'Lufttemperatur' in temp_data.columns:
         temp_data['Lufttemperatur'] = temp_data['Lufttemperatur'].interpolate(method='linear')
-        #temp_data['Lufttemperatur'] = temp_data['Lufttemperatur'].interpolate(method='polynomial', order=2)
-        temp_data['Kvalitet'] = temp_data['Kvalitet'].ffill()
     elif 'Relativ Luftfuktighet' in temp_data.columns:
         temp_data['Relativ Luftfuktighet'] = temp_data['Relativ Luftfuktighet'].interpolate(method='linear')
-        #temp_data['Lufttemperatur'] = temp_data['Lufttemperatur'].interpolate(method='polynomial', order=2)
-        temp_data['Kvalitet'] = temp_data['Kvalitet'].ffill()
-    elif 'Solskenstid' in temp_data.columns:
-        temp_data['Solskenstid'] = temp_data['Solskenstid'].interpolate(method='linear')
-        #temp_data['Lufttemperatur'] = temp_data['Lufttemperatur'].interpolate(method='polynomial', order=2)
-        temp_data['Kvalitet'] = temp_data['Kvalitet'].ffill()
-    
+    elif 'Global Irradians (svenska stationer)' in temp_data.columns:
+        temp_data['Global Irradians (svenska stationer)'] = temp_data['Global Irradians (svenska stationer)'].interpolate(method='linear')
+  
     # Rename index back to 'Timestamp' for consistency
     temp_data.index.name = 'Timestamp'
     
@@ -77,20 +71,18 @@ def fill_missing_timestamps(temp_data, freq='1h'):
 
 # List of file names and labels for plotting
 files = [
-    ('TempMalmoA.csv', 'Malmo', 'TemperatureData'),
-    ('TempHelsingborgA.csv', 'Helsingborg', 'TemperatureData'),
+    ('TempMalmo.csv', 'Malmo', 'TemperatureData'),
+    ('TempHelsingborg.csv', 'Helsingborg', 'TemperatureData'),
     ('TempKalmar.csv', 'Kalmar', 'TemperatureData'),        
     ('TempTorup.csv', 'Halmstad', 'TemperatureData'),
-    ('TempVaxsjo.csv', 'Vaxjo', 'TemperatureData'),
+    ('TempVaxjo.csv', 'Vaxjo', 'TemperatureData'),
     ('HUMIDITYVaxjo.csv', 'Vaxjo', 'HumidityData'),
     ('HUMIDITYKalmar.csv', 'Kalmar', 'HumidityData'),
     ('HUMIDITYMalmo.csv', 'Malmo', 'HumidityData'),
     ('HUMIDITYTorup.csv', 'Torup', 'HumidityData'),
     ('HUMIDITYHelsingborg.csv', 'Helsingborg', 'HumidityData'),
     ('SOLARLund.csv', 'Lund', 'SolarData'),
-    ('SOLARKarlskrona.csv', 'Karlskrona', 'SolarData'),
-    ('SOLARNorthernOland.csv', 'NorthernOland', 'SolarData'),
-    ('SOLARVaxjo.csv', 'Vaxjo', 'SolarData'),
+    ('SOLARVaxjo.csv', 'Vaxjo', 'SolarData')
 ]
 
 # Loop through each file to process and plot
@@ -99,6 +91,10 @@ for filename, label, dataType in files:
     filename = os.path.join(dataType,filename)
     temp_data = process_temp_data(filename)
     temp_data_filled = fill_missing_timestamps(temp_data, freq='1h')
+    
+    # Save the processed DataFrame to a new CSV
+    processed_filename = filename.replace('.csv', '_processed.csv')
+    temp_data_filled.to_csv(processed_filename, index=False)
     
     # Print the length of the processed DataFrame
     print(f"{label} - Number of entries: {len(temp_data_filled)}")
@@ -130,22 +126,8 @@ for filename, label, dataType in files:
         plt.tight_layout()
         plot_name = os.path.join(dataType, f"{label}_humidity.png")
         plt.savefig(plot_name)
-        
-    elif 'Solskenstid' in temp_data.columns:
-        plt.plot(temp_data_filled['Timestamp'], temp_data_filled['Solskenstid']/3600, label=label, color='blue')
-
-        plt.title(f'Sun Hours for {label}')
-        plt.ylabel('Total sun shine (h)')
-        plt.xlabel('Timestamp')
-        plt.xticks(rotation=45)
-        plt.legend()
-        plt.tight_layout()
-        plot_name = os.path.join(dataType, f"{label}_sunhours.png")
-        plt.savefig(plot_name)
-        
-    plt.close()
     
-    if 'Global Irradians (svenska stationer)' in temp_data.columns:
+    elif 'Global Irradians (svenska stationer)' in temp_data.columns:
         plt.plot(temp_data_filled['Timestamp'], temp_data_filled['Global Irradians (svenska stationer)'], label=label, color='blue')
     
         plt.title(f'Sun Irradiation for {label}')
@@ -160,11 +142,3 @@ for filename, label, dataType in files:
     plt.close()  # Close the plot to free memory
 
 print("All plots saved successfully.")
-
-# Population data based on most recent readings
-#pop_malmo = 339316
-#pop_helsingborg = 152091
-#pop_kalmar = 72018
-#pop_halmstad = 106084
-#pop_vaxjo = 70489
-#pop_tot = pop_malmo + pop_helsingborg + pop_kalmar + pop_halmstad + pop_vaxjo
