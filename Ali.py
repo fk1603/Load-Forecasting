@@ -1,28 +1,38 @@
+#%matplotlib inline
+import numpy as np
 import pandas as pd
-from darts import TimeSeries
-import darts.utils.timeseries_generation as tg
 import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+import sys
+import missingno as mno
+import pickle
+import warnings
+warnings.filterwarnings("ignore")
+import logging
+import torch
+from darts import TimeSeries, concatenate
+from darts.dataprocessing.transformers import Scaler
+from darts.models import TFTModel
+from darts.models import NHiTSModel
+from darts.models import TransformerModel
+from darts.models import NBEATSModel
+from darts.metrics import mape, rmse, mse, mae, r2_score,smape
+from darts.utils.timeseries_generation import datetime_attribute_timeseries
+from darts.utils.likelihood_models import QuantileRegression
+from pytorch_lightning.callbacks import Callback, EarlyStopping
+import optuna
+from optuna.integration import PyTorchLightningPruningCallback
+from optuna.visualization import (
+    plot_optimization_history,
+    plot_contour,
+    plot_param_importances,
+)
+from darts.metrics import mape, rmse, mse, mae, r2_score,smape
 
-# Step 1: Load your CSV data
-df = pd.read_csv('processed_load_data.csv')
-
-# Print the column names to inspect the CSV file structure
-print(df.columns)
-
-# Step 2: Optionally, inspect the first few rows of the DataFrame to check the data
-print(df.head())
-
-# Step 3: If 'timestamp' exists in the columns, convert it to datetime
-if 'timestamp' in df.columns:
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
-
-# Step 4: Plot the data (assuming 'timestamp' and 'value' are the column names)
-plt.figure(figsize=(10, 6))
-plt.plot(df['timestamp'], df['value'], label='Time Series Data')
-plt.xlabel('Date')
-plt.ylabel('Value')
-plt.title('Time Series Plot')
-plt.xticks(rotation=45)
-plt.legend()
-plt.tight_layout()
-plt.show()
+from optuna.samplers import TPESampler
+import time
+pd.set_option("display.precision",2)
+np.set_printoptions(precision=2, suppress=True)
+pd.options.display.float_format = '{:,.2f}'.format
+print('Hello World')
