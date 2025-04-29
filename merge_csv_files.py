@@ -53,6 +53,8 @@ populations = {
     'Vaxjo': 70489
 }
 
+# Second set of population based on north and south
+# Used for solar data where measurment locations are limited
 population_area = {
     'Vaxjo': 248591,
     'Lund': 491407
