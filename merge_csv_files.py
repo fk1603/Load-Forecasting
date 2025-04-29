@@ -22,6 +22,23 @@ import re
 
 # print(f"Merged CSV saved to: {output_path}")
 
+# Define the relative folder path from your current directory (Load-Forecasting)
+#folder_path = "LoadData"
+
+# Use glob to find all CSV files that match the pattern in the LoadData folder
+#csv_files = sorted(glob.glob(os.path.join(folder_path, "LoadUTC*.csv")))
+
+# Load and concatenate all CSV files
+#df_list = [pd.read_csv(file, parse_dates=['Time (UTC)']) for file in csv_files]
+#merged_df = pd.concat(df_list)
+
+# Save the merged dataframe to a new CSV file
+#output_path = os.path.join(folder_path, "total_loadUTC_data.csv")
+#merged_df.to_csv(output_path, index=False)
+
+#print(f"Merged CSV saved to: {output_path}")
+
+
 def get_weighted_average(data_dir, file_prefix, column_name, populations, output_filename):
     dfs = {}
     base_dir = os.getcwd()
