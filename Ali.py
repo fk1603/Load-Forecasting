@@ -1,4 +1,3 @@
-#%matplotlib inline
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,7 +7,7 @@ import warnings
 warnings.filterwarnings("ignore")
 import torch
 torch.set_float32_matmul_precision('medium')
-from darts import TimeSeries, concatenate
+from darts import TimeSeries
 from darts.dataprocessing.transformers import Scaler
 from darts.models import TFTModel
 from darts.utils.timeseries_generation import datetime_attribute_timeseries
@@ -17,7 +16,8 @@ from pytorch_lightning.callbacks import Callback, EarlyStopping
 import optuna
 from darts.metrics import mape, rmse, mse, mae, r2_score,smape
 from optuna.samplers import TPESampler
-
+import darts
+torch.serialization.safe_globals([darts.utils.likelihood_models.QuantileRegression])
 
 def add_time_lag_features(df, target_col, lag_periods):
     for lag in lag_periods:
@@ -471,6 +471,7 @@ if LOAD:
     try:
         print("have loaded a previously saved model from disk:" + mpath)
         best_model = TFTModel.load(mpath)
+
         # Add code here to evaluate or use the loaded model if needed
     except FileNotFoundError:
         print(f"Warning: Model not found at {mpath}. Training a new model using best Optuna parameters.")
@@ -518,7 +519,7 @@ num_eval_samples = 500  # Adjust this number as needed
 n_prediction_jobs = os.cpu_count()  # Or try a slightly smaller value
 
 tft_predictions = best_model.predict(
-    n=len(ts_tval),
+    n=24,
     num_samples=num_eval_samples,
     n_jobs=n_prediction_jobs,
     verbose=True
@@ -579,7 +580,7 @@ plot_actual_vs_q50(dfY_tft)
 best_tft_test = best_model.predict(
     series=ts_ttrain.astype(np.float32).concatenate(ts_tval.astype(np.float32)),
     future_covariates=cov_t.astype(np.float32),
-    n= len(ts_ttest)+24,
+    n= len(24),
     num_samples=num_eval_samples,
     n_jobs=3,
     verbose=True
