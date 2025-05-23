@@ -39,7 +39,7 @@ This project trains and applies three different forecasting models for the purpo
     
     Or import the already processed data when running the Jupyter Notebooks containing the models
 
-3. **Open and run Jupyter Notebooks**
+2. **Open and run Jupyter Notebooks**
 
     Open and run the following notebook to generate benchmarks
         - `NSM-ENTSOE.ipynb`
@@ -48,6 +48,8 @@ This project trains and applies three different forecasting models for the purpo
         - `RFR.ipynb`
         - `XGBoost_2.ipynb`
         - `FINALTFT.ipynb`
+
+   3. **Compare results**
 
     Run `create_boxplots.py` to generate boxplots used for model comparison
 
