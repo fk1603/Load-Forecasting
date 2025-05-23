@@ -51,7 +51,7 @@ This project trains and applies three different forecasting models for the purpo
 
  3. **Compare results**
 
-    Run `create_boxplots.py` to generate boxplots used for model comparison
+    Run `create_boxplots.py` to generate box plots used for model comparison
 
 
 ## Notes
