@@ -24,6 +24,8 @@ This project trains and applies three different forecasting models for the purpo
 
 - `FINALTFT.ipynb` – Temporal Fusion Transformer model definition, training and evaluation.
 
+- `create_boxplots.py` - Generates box plots for model comparisons
+
 ## How to Use
 
 1. **(Optional) Run Data Preprocessing Scripts**
@@ -46,6 +48,8 @@ This project trains and applies three different forecasting models for the purpo
         - `RFR.ipynb`
         - `XGBoost_2.ipynb`
         - `FINALTFT.ipynb`
+
+    Run `create_boxplots.py` to generate boxplots used for model comparison
 
 
 ## Notes
