@@ -40,7 +40,8 @@ This project trains and applies three different forecasting models for the purpo
 3. **Open and run Jupyter Notebooks**
 
     Open and run the following notebook to generate benchmarks
-        - `NSM-ENTSOE.ipynb` 
+        - `NSM-ENTSOE.ipynb`
+   
     Open and run the following notebooks to train/import models and evaluate them
         - `RFR.ipynb`
         - `XGBoost_2.ipynb`
