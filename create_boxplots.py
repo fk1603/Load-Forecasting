@@ -8,32 +8,16 @@ df4 = pd.read_csv("ENTSO-E.csv")
 
 values1 = df1['abs_pct_error']
 values2 = df2['abs_pct_error']
-values3 = df3['abs_pct_error']
+values3 = df3['daily_mape']
 values4 = df4['abs_pct_error']
 
 # Create box plot
 plt.boxplot([values1, values2, values3, values4], labels=['RFR', 'XGB', 'TFT', 'ENTSO-E'])
 
 # Customize the plot
-plt.title("Box Plot of Entire Test Range")
 plt.ylabel("Value")
 plt.grid(True)
 
 # Show the plot
+plt.savefig("boxplot_comparison.pdf", format="pdf", bbox_inches="tight")
 plt.show()
-
-'''
-plt.figure(figsize=(10, 5))
-plt.boxplot(daily_mape.values, vert=True, patch_artist=True,
-                boxprops=dict(facecolor='lightblue', color='blue'),
-                medianprops=dict(color='red'),
-                whiskerprops=dict(color='gray'),
-                capprops=dict(color='gray'),
-                flierprops=dict(marker='o', markerfacecolor='gray', markersize=5, linestyle='none'))
-
-plt.ylabel("MAPE (%)")
-plt.title("Distribution of Daily MAPE")
-plt.grid(True, linestyle='--', alpha=0.6)
-plt.tight_layout()
-plt.show()
-'''
