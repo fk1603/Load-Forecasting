@@ -4,7 +4,7 @@ import os
 
 # Define load data file path
 base_dir = os.getcwd()
-folder_path = os.path.join(base_dir,"Load-Forecasting", "LoadData")
+folder_path = os.path.join(base_dir, "LoadData")
 
 # Use glob to find all csv files that match the pattern in the directory
 csv_files = sorted(glob.glob(os.path.join(folder_path, "LoadUTC*.csv")))
