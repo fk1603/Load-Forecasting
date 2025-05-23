@@ -1,14 +1,23 @@
 import os
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
 def process_temp_data(file):
+    '''
+    Processes a temporary data file by identifying the correct header row,
+    parsing the contents, and combining date and time columns into a timestamp.
+
+    Parameters: 
+        file: Path to the temperature data file in CSV format with metadata rows.
+
+    Returns: DataFrame containing the parsed data with a 'Timestamp' 
+             column combining date and time.
+    '''
+
     # Skip metadata rows and find the actual header row (starts with 'Datum')
     with open(file, 'r', encoding='utf-8') as f:
         lines = f.readlines()
 
-    #header_idx = None
     # Find the header row index
     for i, line in enumerate(lines):
         if line.strip().startswith('Datum'):
@@ -16,13 +25,11 @@ def process_temp_data(file):
             break
 
     # Read the file starting from the header line
-    temp_data = pd.read_csv(
-        file,
-        sep=';',
-        header=0,
-        skiprows=header_idx,  # This will treat the correct line as header
-        encoding='utf-8'
-    )
+    temp_data = pd.read_csv(file,
+                            sep=';',
+                            header=0,
+                            skiprows=header_idx,  # This will treat the correct line as header
+                            encoding='utf-8')
 
     # Combine date and time columns into a single datetime column (best guess on column names)
     date_col = [col for col in temp_data.columns if 'Datum' in col][0]
@@ -33,6 +40,20 @@ def process_temp_data(file):
     return temp_data
 
 def fill_missing_timestamps(temp_data, freq='1h'):
+    '''
+    Fills missing timestamps in a temporary DataFrame by reindexing to a complete
+    datetime range and interpolating missing values.
+
+    Parameters:
+        temp_data: DataFrame containing 'Datum' and 'Tid (UTC)' columns
+        representing date and time, respectively.
+        freq: Frequency string for the desired timestamp interval.
+
+    Returns: DataFrame with a continuous time index and interpolated values
+             for one of the known weather-related columns (e.g., temperature,
+             humidity, irradiance).
+    '''
+
     # Ensure 'Datum' and 'Tid (UTC)' columns exist
     if 'Datum' not in temp_data.columns or 'Tid (UTC)' not in temp_data.columns:
         raise ValueError("The input DataFrame must contain 'Datum' and 'Tid (UTC)' columns.")
@@ -53,7 +74,7 @@ def fill_missing_timestamps(temp_data, freq='1h'):
     # Reindex to fill missing timestamps
     temp_data = temp_data.reindex(full_index)
 
-    # Interpolate missing values in 'Lufttemperatur'
+    # Interpolate missing values with linear interpolation
     if 'Lufttemperatur' in temp_data.columns:
         temp_data['Lufttemperatur'] = temp_data['Lufttemperatur'].interpolate(method='linear')
     elif 'Relativ Luftfuktighet' in temp_data.columns:
@@ -70,39 +91,37 @@ def fill_missing_timestamps(temp_data, freq='1h'):
     return temp_data
 
 # List of file names and labels for plotting
-files = [
-    ('TempMalmo.csv', 'Malmo', 'TemperatureData'),
-    ('TempHelsingborg.csv', 'Helsingborg', 'TemperatureData'),
-    ('TempKalmar.csv', 'Kalmar', 'TemperatureData'),        
-    ('TempTorup.csv', 'Halmstad', 'TemperatureData'),
-    ('TempVaxjo.csv', 'Vaxjo', 'TemperatureData'),
-    ('HUMIDITYVaxjo.csv', 'Vaxjo', 'HumidityData'),
-    ('HUMIDITYKalmar.csv', 'Kalmar', 'HumidityData'),
-    ('HUMIDITYMalmo.csv', 'Malmo', 'HumidityData'),
-    ('HUMIDITYTorup.csv', 'Torup', 'HumidityData'),
-    ('HUMIDITYHelsingborg.csv', 'Helsingborg', 'HumidityData'),
-    ('SOLARLund.csv', 'Lund', 'SolarData'),
-    ('SOLARVaxjo.csv', 'Vaxjo', 'SolarData')
-]
+files = [('TempMalmo.csv', 'Malmo', 'TemperatureData'),
+         ('TempHelsingborg.csv', 'Helsingborg', 'TemperatureData'),
+         ('TempKalmar.csv', 'Kalmar', 'TemperatureData'),        
+         ('TempTorup.csv', 'Halmstad', 'TemperatureData'),
+         ('TempVaxjo.csv', 'Vaxjo', 'TemperatureData'),
+         ('HUMIDITYVaxjo.csv', 'Vaxjo', 'HumidityData'),
+         ('HUMIDITYKalmar.csv', 'Kalmar', 'HumidityData'),
+         ('HUMIDITYMalmo.csv', 'Malmo', 'HumidityData'),
+         ('HUMIDITYTorup.csv', 'Torup', 'HumidityData'),
+         ('HUMIDITYHelsingborg.csv', 'Helsingborg', 'HumidityData'),
+         ('SOLARLund.csv', 'Lund', 'SolarData'),
+         ('SOLARVaxjo.csv', 'Vaxjo', 'SolarData')]
 
-# Loop through each file to process and plot
+# Loop through each file to process weather data and plot
 for filename, label, dataType in files:
-    # Process the data
+
     filename = os.path.join(dataType,filename)
+
+    # Create temporary dataframe for weather data 
     temp_data = process_temp_data(filename)
     temp_data_filled = fill_missing_timestamps(temp_data, freq='1h')
     
-    # Save the processed DataFrame to a new CSV
+    # Save the processed DataFrame to a new csv file
     processed_filename = filename.replace('.csv', '_processed.csv')
     temp_data_filled.to_csv(processed_filename, index=False)
     
-    # Print the length of the processed DataFrame
     print(f"{label} - Number of entries: {len(temp_data_filled)}")
 
-    # Create a new figure for each dataset
     plt.figure(figsize=(12, 6))
     
-    # Plot the temperature data
+    # Plot the processed temperature data
     if 'Lufttemperatur' in temp_data.columns:
         plt.plot(temp_data_filled['Timestamp'], temp_data_filled['Lufttemperatur'], label=label, color='blue')
     
@@ -115,6 +134,7 @@ for filename, label, dataType in files:
         plot_name = os.path.join(dataType, f"{label}temperature.png")
         plt.savefig(plot_name)
     
+    # Plot the processed humidity data
     elif 'Relativ Luftfuktighet' in temp_data.columns:
         plt.plot(temp_data_filled['Timestamp'], temp_data_filled['Relativ Luftfuktighet'], label=label, color='blue')
     
@@ -127,6 +147,7 @@ for filename, label, dataType in files:
         plot_name = os.path.join(dataType, f"{label}_humidity.png")
         plt.savefig(plot_name)
     
+    # Plot the processed solar irradiation data
     elif 'Global Irradians (svenska stationer)' in temp_data.columns:
         plt.plot(temp_data_filled['Timestamp'], temp_data_filled['Global Irradians (svenska stationer)'], label=label, color='blue')
     
@@ -139,6 +160,4 @@ for filename, label, dataType in files:
         plot_name = os.path.join(dataType, f"{label}_sunirradiation.png")
         plt.savefig(plot_name)
 
-    plt.close()  # Close the plot to free memory
-
-print("All plots saved successfully.")
+    plt.close()
