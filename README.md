@@ -4,17 +4,25 @@ This project trains and applies three different forecasting models for the purpo
 
 ## Project Structure
 
-| `merge_load_files.py`         | Merges multiple raw data files containing load data from ENTSO-E into one csv file. 
-                                  All used data is present in this repository under the LoadData folder 
-| `LoadDataPreprocessing.py`    | Preprocesses load data from raw csv:s, processes the merged load data file 
-                                  and prints final load csv used later on when modeling
-| `WeatherDataPreprocessing.py` | Processes and interpolates weather data and writes this data to new csv files. 
-                                  All raw data is available un this repository 
-| `compute_weighted_averages.py`| Computes weighted average weaither covariate series and exports csv files used later on when modeling 
-| `NSM-ENTSOE.ipynb`            | Notebook containing a Naive Seasonal Model and ENTSO-E forecast. Used for benchmarks and model comparison 
-| `RFR.ipynb`                   | Random Forest model training and evaluation 
-| `XGBoost_2.ipynb`             | Extreme Gradient boosting model training and evaluation 
-| `FINALTFT.ipynb`              | Temporal Fusion Transformer model training and evaluation 
+- `merge_load_files.py` – Merges multiple raw data files containing load data from ENTSO-E into one CSV file.  
+  All used data is present in this repository under the `LoadData` folder.
+
+- `LoadDataPreprocessing.py` – Preprocesses load data from raw CSVs, processes the merged load data file,  
+  and prints final load CSV used later on when modeling.
+
+- `WeatherDataPreprocessing.py` – Processes and interpolates weather data and writes this data to new CSV files.  
+  All raw data is available in this repository.
+
+- `compute_weighted_averages.py` – Computes weighted average weather covariate series and exports CSV files used later on when modeling.
+
+- `NSM-ENTSOE.ipynb` – Notebook containing a Naive Seasonal Model and ENTSO-E forecast.  
+  Used for benchmarks and model comparison.
+
+- `RFR.ipynb` – Random Forest model training and evaluation.
+
+- `XGBoost_2.ipynb` – Extreme Gradient Boosting model training and evaluation.
+
+- `FINALTFT.ipynb` – Temporal Fusion Transformer model training and evaluation.
 
 ## How to Use
 
