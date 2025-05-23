@@ -18,11 +18,11 @@ This project trains and applies three different forecasting models for the purpo
 - `NSM-ENTSOE.ipynb` – Notebook containing a Naive Seasonal Model and ENTSO-E forecast.  
   Used for benchmarks and model comparison.
 
-- `RFR.ipynb` – Random Forest model training and evaluation.
+- `RFR.ipynb` – Random Forest model definition, training and evaluation.
 
-- `XGBoost_2.ipynb` – Extreme Gradient Boosting model training and evaluation.
+- `XGBoost_2.ipynb` – Extreme Gradient Boosting model definition, training and evaluation.
 
-- `FINALTFT.ipynb` – Temporal Fusion Transformer model training and evaluation.
+- `FINALTFT.ipynb` – Temporal Fusion Transformer model definition, training and evaluation.
 
 ## How to Use
 
