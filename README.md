@@ -22,7 +22,7 @@ This project trains and applies three different forecasting models for the purpo
 
 - `XGBoost_2.ipynb` – Extreme Gradient Boosting model definition, training and evaluation.
 
-- `FINALTFT.ipynb` – Temporal Fusion Transformer model definition, training and evaluation.
+- `TFTFINAL.ipynb` – Temporal Fusion Transformer model definition, training and evaluation.
 
 - `create_boxplots.py` - Generates box plots for model comparisons
 
@@ -60,11 +60,18 @@ This project trains and applies three different forecasting models for the purpo
   doesn't have an uploaded saved model due to its large size (around 2.5 GB). Instead it's defined with a fixed random seed, so retraining
   won't change the model output. It will however take a couple of minutes to run `RFR.ipynb`
 
+- The trained and saved TFT model requires a gpu to run. It is possible to run the code on a cpu, but it would require a new model to be trained
+
 ---
 
 ## Requirements
 
-Install all required python packages as:
+The models use slightly different python packages, and in some instances with different versions. For this reason each model comes with its own requirements text files. These are defined as:
 
 ```bash
-pip install -r requirements.txt
+RFR_requirements.txt
+XGB_requirements.txt
+TFT_requirements.txt
+```
+
+For the RFR, XGB and TFT models respectively
