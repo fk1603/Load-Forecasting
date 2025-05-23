@@ -15,7 +15,8 @@ values4 = df4['abs_pct_error']
 plt.boxplot([values1, values2, values3, values4], labels=['RFR', 'XGB', 'TFT', 'ENTSO-E'])
 
 # Customize the plot
-plt.ylabel("Value")
+plt.ylabel("MAPE [%]", fontsize=16)
+plt.xticks(fontsize=16)
 plt.grid(True)
 
 # Show the plot
