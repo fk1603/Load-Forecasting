@@ -49,7 +49,7 @@ This project trains and applies three different forecasting models for the purpo
         - `XGBoost_2.ipynb`
         - `FINALTFT.ipynb`
 
-   3. **Compare results**
+ 3. **Compare results**
 
     Run `create_boxplots.py` to generate boxplots used for model comparison
 
