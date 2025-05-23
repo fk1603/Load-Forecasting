@@ -26,7 +26,7 @@ This project trains and applies three different forecasting models for the purpo
 
 ## How to Use
 
-1. ** (Optional) Run Data Preprocessing Scripts**
+1. **(Optional) Run Data Preprocessing Scripts**
 
     Run these Python scripts in this order to prepare all data:
 
