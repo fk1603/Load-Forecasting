@@ -1,9 +1,15 @@
 import os
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
 def plot_load_data(data):
+    '''
+    Plots actual load vs. ENTSO-E forecasted load
+
+    Parameters:
+        data: DataFrame containing time and actual- and forecasted load data
+    '''
+
     # Use start time as plot reference value
     data['Start Time'] = data['Time (UTC)'].str.split(' - ').str[0]
     data['Start Time'] = pd.to_datetime(data['Start Time'], format='%d.%m.%Y %H:%M')
@@ -21,6 +27,16 @@ def plot_load_data(data):
     plt.show()
 
 def preprocess_load_data(file_path):
+    '''
+    Processes both forecasted and actual load data by defining timestamps and
+    interpolating missing values
+
+    Parameters:
+        file_path: Defines from which path the load data is to be read
+    
+    Returns: Preprocessed and filled dataframe containing actual- and forecasted load
+    '''
+
     df = pd.read_csv(file_path)
 
     # Keep original time range string
@@ -59,11 +75,3 @@ plot_load_data(load_data)
 # print(load_data)
 len_load = len(load_data)
 print(len_load)
-
-# Population data based on most recent readings
-pop_malmo = 339316
-pop_helsingborg = 152091
-pop_kalmar = 72018
-pop_halmstad = 106084
-pop_vaxjo = 70489
-pop_tot = pop_malmo + pop_helsingborg + pop_kalmar + pop_halmstad + pop_vaxjo
