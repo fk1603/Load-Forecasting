@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a96abf09-f593-4173-a5e5-b3627f3b22cd" name="Changes" comment="fixup! Ali.py">
-      <change beforePath="$PROJECT_DIR$/Ali.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ali.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Testing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Load-Forecasting.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Load-Forecasting.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_10_2025_3_53_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_10_2025_3_53_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sidekick.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Sidekick.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Slutlig.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Slutlig.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/darts_logs/TFT/_model.pth.tar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/darts_logs/TFT/checkpoints/best-epoch=6-val_loss=0.18.ckpt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/darts_logs/TFT/checkpoints/last-epoch=9.ckpt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,14 +87,19 @@
     &quot;Python.WeatherDataPreprocessing.executor&quot;: &quot;Run&quot;,
     &quot;Python.data_plot.executor&quot;: &quot;Run&quot;,
     &quot;Python.load_forecasting.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;test__ali&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ali Kamran/PycharmProjects/Load-Forecasting&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: []
+    &quot;ChangesTree.GroupingKeys&quot;: [
+    ]
   }
 }</component>
   <component name="SharedIndexes">
@@ -103,6 +117,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1744368415451</updated>
+      <workItem from="1747998147796" duration="144000" />
+      <workItem from="1747998306397" duration="423000" />
     </task>
     <task id="LOCAL-00001" summary="TFT File">
       <option name="closed" value="true" />
@@ -162,6 +178,9 @@
     </task>
     <option name="localTasksCounter" value="8" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="RECENT_FILTERS">
